@@ -6,12 +6,14 @@ import * as Yup from 'yup';
 import { Link } from 'components';
 import { Layout } from 'components/account';
 import { userService, alertService } from 'services';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 export default Login;
 
 function Login() {
+    const { t } = useTranslation("common")
     const router = useRouter();
-
     // form validation rules 
     const validationSchema = Yup.object().shape({
         username: Yup.string().required('Username is required'),
@@ -35,6 +37,7 @@ function Login() {
 
     return (
         <Layout>
+            <h1>{t("hello")}</h1>
             <div className="card">
                 <h4 className="card-header">Login</h4>
                 <div className="card-body">
@@ -59,4 +62,12 @@ function Login() {
             </div>
         </Layout>
     );
+}
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ['common'])),
+        },
+    };
 }

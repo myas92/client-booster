@@ -1,3 +1,4 @@
+import { appWithTranslation } from 'next-i18next';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
@@ -7,7 +8,7 @@ import 'styles/globals.css';
 import { userService } from 'services';
 import { Nav, Alert } from 'components';
 
-export default App;
+export default appWithTranslation(App);
 
 function App({ Component, pageProps }) {
     const router = useRouter();
@@ -42,8 +43,7 @@ function App({ Component, pageProps }) {
         if (!userService.userValue && !publicPaths.includes(path)) {
             setAuthorized(false);
             router.push({
-                pathname: '/account/login',
-                query: { returnUrl: router.asPath }
+                pathname: '/account/login'
             });
         } else {
             setAuthorized(true);

@@ -1,3 +1,4 @@
+const { i18n } = require("./next-i18next.config");
 module.exports = {
     reactStrictMode: true,
     serverRuntimeConfig: {
@@ -7,5 +8,6 @@ module.exports = {
         apiUrl: process.env.NODE_ENV === 'development'
             ? 'http://localhost:3000/api' // development api
             : 'http://localhost:3000/api' // production api
-    }
+    },
+    i18n
 }
