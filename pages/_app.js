@@ -38,13 +38,17 @@ function App({ Component, pageProps }) {
     function authCheck(url) {
         // redirect to login page if accessing a private page and not logged in 
         setUser(userService.userValue);
-        const publicPaths = ['/account/login', '/account/register'];
-        const path = url.split('?')[0];
-        if (!userService.userValue && !publicPaths.includes(path)) {
+        const publicPaths = ['/account/login', '/account/register',`/${router.locale}/account/login`, `/${router.locale}/account/register`];
+        const pathWithLang = url.split('?')[0];
+        if (!userService.userValue && !publicPaths.includes(pathWithLang)) {
             setAuthorized(false);
-            router.push({
-                pathname: '/account/login'
-            });
+            if(router.locale!='fa'){
+                router.push( `/${router.locale}/account/login`);
+
+            }
+            else{
+                router.push( `/account/login`);
+            }    
         } else {
             setAuthorized(true);
         }
