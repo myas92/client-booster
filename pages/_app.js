@@ -14,7 +14,9 @@ function App({ Component, pageProps }) {
     const router = useRouter();
     const [user, setUser] = useState(null);
     const [authorized, setAuthorized] = useState(false);
-
+    const { locale } = router;
+    const bootstrapUrl = locale == 'fa' ? "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" :
+        "//netdna.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     useEffect(() => {
         // on initial load - run auth check 
         authCheck(router.asPath);
@@ -38,17 +40,17 @@ function App({ Component, pageProps }) {
     function authCheck(url) {
         // redirect to login page if accessing a private page and not logged in 
         setUser(userService.userValue);
-        const publicPaths = ['/account/login', '/account/register',`/${router.locale}/account/login`, `/${router.locale}/account/register`];
+        const publicPaths = ['/account/login', '/account/register', `/${locale}/account/login`, `/${locale}/account/register`];
         const pathWithLang = url.split('?')[0];
         if (!userService.userValue && !publicPaths.includes(pathWithLang)) {
             setAuthorized(false);
-            if(router.locale!='fa'){
-                router.push( `/${router.locale}/account/login`);
+            if (router.locale != 'fa') {
+                router.push(`/${router.locale}/account/login`);
 
             }
-            else{
-                router.push( `/account/login`);
-            }    
+            else {
+                router.push(`/account/login`);
+            }
         } else {
             setAuthorized(true);
         }
@@ -58,18 +60,18 @@ function App({ Component, pageProps }) {
         <>
             <Head>
                 <title>User Registration and Login Example</title>
-                
-                {/* eslint-disable-next-line @next/next/no-css-tags */}
-                <link href="//netdna.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-            </Head>
 
-            <div className={`app-container ${user ? 'bg-light' : ''}`}>
+                {/* eslint-disable-next-line @next/next/no-css-tags */}
+                <link rel="stylesheet" href={bootstrapUrl} />
+            </Head>
+            <div className={`app-container ${user ? 'bg-light' : ''}`} dir={locale == "fa" ? "rtl" : "ltr"}>
                 <Nav />
                 <Alert />
                 {authorized &&
                     <Component {...pageProps} />
                 }
             </div>
+
         </>
     );
 }
