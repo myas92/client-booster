@@ -37,26 +37,25 @@ function Login() {
 
     return (
         <Layout>
-            <h1>{t("hello")}</h1>
             <div className="card">
-                <h4 className="card-header">Login</h4>
+                <h4 className="card-header">{t("login")}</h4>
                 <div className="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-group">
-                            <label>Username</label>
+                            <label>{t("username")}</label>
                             <input name="username" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
                             <div className="invalid-feedback">{errors.username?.message}</div>
                         </div>
                         <div className="form-group">
-                            <label>Password</label>
+                            <label>{t("password")}</label>
                             <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
                             <div className="invalid-feedback">{errors.password?.message}</div>
                         </div>
                         <button disabled={formState.isSubmitting} className="btn btn-primary">
                             {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
-                            Login
+                            {t("login")}
                         </button>
-                        <Link href="/account/register" className="btn btn-link">Register</Link>
+                        <Link href="/account/register" className="btn btn-link">{t("register")}</Link>
                     </form>
                 </div>
             </div>

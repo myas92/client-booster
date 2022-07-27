@@ -1,3 +1,8 @@
 {
-    "hello": "سلام"
+    "hello": "سلام",
+    "login": "ورود",
+    "username": "نام کاربری",
+    "password": "رمز عبور",
+    "register": "ثبت نام",
+    "home": "خانه"
 }
