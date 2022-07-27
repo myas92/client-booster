@@ -1,16 +1,25 @@
-import { userService } from 'services';
-import { Link } from 'components';
-
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useRouter } from 'next/router';
 export default Home;
-
 function Home() {
+    const { t } = useTranslation("common");
+    const router = useRouter();
+    console.log(router);
     return (
         <div className="p-4">
             <div className="container">
-                <h1>Hi {userService.userValue?.firstName}!</h1>
-                <p>You&apos;re logged in with Next.js & JWT!!</p>
-                <p><Link href="/users">Manage Users</Link></p>
+                <h1>{t("hello")}</h1>
             </div>
         </div>
     );
+}
+
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ['common'])),
+        },
+    };
 }
