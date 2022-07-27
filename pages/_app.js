@@ -1,10 +1,7 @@
 import { appWithTranslation } from 'next-i18next';
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-
 import 'styles/globals.css';
 
 import { userService } from 'services';
@@ -14,7 +11,6 @@ import Link from 'next/link';
 export default appWithTranslation(App);
 
 function App({ Component, pageProps }) {
-    const { t } = useTranslation("common");
     const router = useRouter();
     const [user, setUser] = useState(null);
     const [authorized, setAuthorized] = useState(false);
@@ -49,14 +45,14 @@ function App({ Component, pageProps }) {
             `/${locale}/account/login`,
             `/${locale}/account/register`,
             `/`,
-            `/${locale}/`];
+            `/${locale}`];
 
         const pathWithLang = url.split('?')[0];
         if (!userService.userValue && !publicPaths.includes(pathWithLang)) {
             setAuthorized(false);
             if (locale != 'fa') {
-                if ([`/${locale}/`].includes(pathWithLang)) {
-                    router.push(`/${locale}/`);
+                if ([`/${locale}`].includes(pathWithLang)) {
+                    router.push(`/${locale}`);
                 }
                 else {
                     router.push(`/${locale}/account/login`);
@@ -84,9 +80,6 @@ function App({ Component, pageProps }) {
                 <link rel="stylesheet" href={bootstrapUrl} />
             </Head>
             <div className={`app-container ${user ? 'bg-light' : ''}`} dir={locale == "fa" ? "rtl" : "ltr"}>
-                <Link href="/">
-                    <button type="button" className="btn btn-primary">{t("home")}</button>
-                </Link>
                 <Nav />
                 <Alert />
                 {authorized &&
@@ -96,13 +89,4 @@ function App({ Component, pageProps }) {
 
         </>
     );
-}
-
-
-export async function getStaticProps({ locale }) {
-    return {
-        props: {
-            ...(await serverSideTranslations(locale, ['common'])),
-        },
-    };
 }

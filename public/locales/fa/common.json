@@ -4,5 +4,8 @@
     "username": "نام کاربری",
     "password": "رمز عبور",
     "register": "ثبت نام",
-    "home": "خانه"
+    "home": "خانه",
+    "manage_users": "مدیریت کاربران",
+    "logout": "خروج",
+    "users": "کاربران"
 }

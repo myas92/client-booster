@@ -4,5 +4,8 @@
     "username": "Username",
     "password": "Password",
     "register": "Register",
-    "home": "Home"
+    "home": "Home",
+    "manage_users": "Manage Users",
+    "logout": "Logout",
+    "users": "Users"
 }
