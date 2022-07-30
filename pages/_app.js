@@ -7,6 +7,15 @@ import 'styles/globals.css';
 import { userService } from 'services';
 import { Nav, Alert } from 'components';
 import Link from 'next/link';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Typography } from "@mui/material";
+
+export let theme = createTheme({
+    typography: {
+        fontFamily: "iranyekan bold",
+    }
+});
+
 
 export default appWithTranslation(App);
 
@@ -16,7 +25,7 @@ function App({ Component, pageProps }) {
     const [authorized, setAuthorized] = useState(false);
     const { locale } = router;
     const bootstrapUrl = locale == 'fa' ? "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" :
-        "//netdna.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        "//netdna.bootstrapcdn.com/bootstrap/5.0.2/css/bootstrap.min.css"
     useEffect(() => {
         // on initial load - run auth check 
         authCheck(router.asPath);
@@ -75,16 +84,18 @@ function App({ Component, pageProps }) {
         <>
             <Head>
                 <title>User Registration and Login Example</title>
-
+                <meta name="viewport" content="initial-scale=1, width=device-width" />
                 {/* eslint-disable-next-line @next/next/no-css-tags */}
                 <link rel="stylesheet" href={bootstrapUrl} />
             </Head>
             <div className={`app-container ${user ? 'bg-light' : ''}`} dir={locale == "fa" ? "rtl" : "ltr"}>
+                <ThemeProvider theme={theme}>
                 <Nav />
                 <Alert />
-                {authorized &&
-                    <Component {...pageProps} />
-                }
+                    {authorized &&
+                        <Component {...pageProps} />
+                    }
+                </ThemeProvider>
             </div>
 
         </>
