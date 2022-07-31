@@ -8,6 +8,7 @@ import { userService } from 'services';
 import { NavBar, Alert } from 'components';
 import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.rtl.min.css';
 import { Button, SSRProvider, ThemeProvider } from 'react-bootstrap';
 
 export default appWithTranslation(App);
@@ -71,7 +72,6 @@ function App({ Component, pageProps }) {
             setAuthorized(true);
         }
     }
-
     return (
         <>
             <Head>
@@ -79,13 +79,10 @@ function App({ Component, pageProps }) {
                 <meta name="viewport" content="initial-scale=1, width=device-width" />
             </Head>
             <SSRProvider>
-                <ThemeProvider dir="rtl">
-                    <div className={`app-container ${user ? 'bg-light' : ''}`} dir={locale == "fa" ? "rtl" : "ltr"}>
-                        <NavBar />
-                        <Button as="a" variant="primary">
-                            Button as link
-                        </Button>
-                        <Alert />
+                <ThemeProvider>
+                    <div className={`app-container ${user ? 'bg-light' : ''}`} dir={locale == "fa" ? "rtl" : "ltr"} >
+                    <NavBar />
+                    <Alert />
                         {authorized && <Component {...pageProps} />}
                     </div>
                 </ThemeProvider>
