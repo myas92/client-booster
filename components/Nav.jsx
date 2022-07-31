@@ -88,9 +88,17 @@ function NavBar() {
 
     // only show nav when logged in
     if (!user) return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="light" expand="lg" >
             <Container>
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                <Navbar.Brand href="/">
+                    <img
+                        src="/favicon.ico"
+                        width="30"
+                        height="30"
+                        className="d-inline-block align-top"
+                        alt=""
+                    />
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
@@ -103,7 +111,7 @@ function NavBar() {
                                             return <NavDropdown.Item key={dropdownItem.id} href={dropdownItem.url}>{t(dropdownItem.name)}</NavDropdown.Item>
                                         }
                                     )
-                                    const parentNavDropdown = <NavDropdown title={t(navbarItem.name)} id="basic-nav-dropdown">{dropdowns}</NavDropdown>
+                                    const parentNavDropdown = <NavDropdown key={20} title={t(navbarItem.name)} id="basic-nav-dropdown">{dropdowns}</NavDropdown>
                                     currentItem.push(parentNavDropdown)
                                 }
                                 else {
