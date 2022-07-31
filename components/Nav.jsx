@@ -3,64 +3,14 @@ import { useState, useEffect } from 'react';
 import { NavLink } from '.';
 import { userService } from 'services';
 import { useTranslation } from 'next-i18next';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import Fade from '@mui/material/Fade';
+import { Accordion, Container, Navbar, NavDropdown, Nav } from 'react-bootstrap';
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-export { Nav };
+export { NavBar };
 
-function Nav() {
+function NavBar() {
     const { t } = useTranslation("common");
     const [user, setUser] = useState(null);
-    const [anchorElNav, setAnchorElNav] = useState(null);
-    const [anchorElUser, setAnchorElUser] = useState(null);
-    const [isClickedMarkets, setClickedMarkets] = useState(null);
-    const [isClickedTrades, setClickedTrades] = useState(null);
-
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
-
-    const openMarkets = Boolean(isClickedMarkets);
-    const openTrades = Boolean(isClickedTrades);
-    const handleClickMarkets = (event) => {
-        setClickedMarkets(event.currentTarget);
-    };
-    const handleClickTrades = (event) => {
-        setClickedTrades(event.currentTarget);
-    };
-
-
-    const handleCloseMarkets = () => {
-        setClickedMarkets(null);
-    };
-
-    const handleCloseTrades = () => {
-        setClickedTrades(null);
-    };
 
     useEffect(() => {
         const subscription = userService.user.subscribe(x => setUser(x));
@@ -73,99 +23,29 @@ function Nav() {
 
     // only show nav when logged in
     if (!user) return (
-        <AppBar position="static">
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
-                            color="inherit"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            color="red"
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                            }}
-                        >
-                            <MenuItem key={1} onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">بازارها</Typography>
-                            </MenuItem>
-
-                        </Menu>
-                    </Box>
-
-                    <Button
-                        color="secondary"
-                        id="fade-button"
-                        aria-controls={openMarkets ? 'fade-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={openMarkets ? 'true' : undefined}
-                        onClick={handleClickMarkets}
-                    >
-                        بازار
-                    </Button>
-                    <Menu
-                        id="fade-menu"
-                        MenuListProps={{
-                            'aria-labelledby': 'fade-button',
-                        }}
-                        anchorEl={isClickedMarkets}
-                        open={openMarkets}
-                        onClose={handleCloseMarkets}
-                        TransitionComponent={Fade}
-                    >
-                        <MenuItem onClick={handleCloseMarkets}>بیتکوین</MenuItem>
-                        <MenuItem onClick={handleCloseMarkets}>تتر</MenuItem>
-                        <MenuItem onClick={handleCloseMarkets}>اتریوم</MenuItem>
-                    </Menu>
-
-
-
-                    <Button
-                        color="secondary"
-                        id="fade-button1"
-                        aria-controls={openTrades ? 'fade-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={openTrades ? 'true' : undefined}
-                        onClick={handleClickTrades}
-                    >
-                        معامله ها
-                    </Button>
-                    <Menu
-                        id="fade-menu1"
-                        MenuListProps={{
-                            'aria-labelledby': 'fade-button',
-                        }}
-                        anchorEl={isClickedTrades}
-                        open={openTrades}
-                        onClose={handleCloseTrades}
-                        TransitionComponent={Fade}
-                    >
-                        <MenuItem onClick={handleCloseTrades}>معامله سبک</MenuItem>
-                        <MenuItem onClick={handleCloseTrades}>معامله حرفه ای</MenuItem>
-                    </Menu>
-                </Toolbar>
-            </Container>
-        </AppBar>
+        <Navbar bg="light" expand="lg">
+        <Container>
+          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="#link">Link</Nav.Link>
+              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">
+                  Another action
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">
+                  Separated link
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     );
 
     return (

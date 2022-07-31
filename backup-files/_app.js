@@ -5,10 +5,17 @@ import { useRouter } from 'next/router';
 import 'styles/globals.css';
 
 import { userService } from 'services';
-import { NavBar, Alert } from 'components';
+import { Nav, Alert } from 'components';
 import Link from 'next/link';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, SSRProvider, ThemeProvider } from 'react-bootstrap';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Typography } from "@mui/material";
+
+export let theme = createTheme({
+    typography: {
+        fontFamily: "iranyekan bold",
+    }
+});
+
 
 export default appWithTranslation(App);
 
@@ -17,7 +24,8 @@ function App({ Component, pageProps }) {
     const [user, setUser] = useState(null);
     const [authorized, setAuthorized] = useState(false);
     const { locale } = router;
-
+    const bootstrapUrl = locale == 'fa' ? "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" :
+        "//netdna.bootstrapcdn.com/bootstrap/5.0.2/css/bootstrap.min.css"
     useEffect(() => {
         // on initial load - run auth check 
         authCheck(router.asPath);
@@ -75,21 +83,21 @@ function App({ Component, pageProps }) {
     return (
         <>
             <Head>
-                <title>Booster</title>
+                <title>User Registration and Login Example</title>
                 <meta name="viewport" content="initial-scale=1, width=device-width" />
+                {/* eslint-disable-next-line @next/next/no-css-tags */}
+                <link rel="stylesheet" href={bootstrapUrl} />
             </Head>
-            <SSRProvider>
-                <ThemeProvider dir="rtl">
-                    <div className={`app-container ${user ? 'bg-light' : ''}`} dir={locale == "fa" ? "rtl" : "ltr"}>
-                        <NavBar />
-                        <Button as="a" variant="primary">
-                            Button as link
-                        </Button>
-                        <Alert />
-                        {authorized && <Component {...pageProps} />}
-                    </div>
+            <div className={`app-container ${user ? 'bg-light' : ''}`} dir={locale == "fa" ? "rtl" : "ltr"}>
+                <ThemeProvider theme={theme}>
+                <Nav />
+                <Alert />
+                    {authorized &&
+                        <Component {...pageProps} />
+                    }
                 </ThemeProvider>
-            </SSRProvider>
+            </div>
+
         </>
     );
 }
