@@ -4,8 +4,73 @@ import { NavLink } from '.';
 import { userService } from 'services';
 import { useTranslation } from 'next-i18next';
 import { Accordion, Container, Navbar, NavDropdown, Nav } from 'react-bootstrap';
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+const navbarItems = [
+    {
+        id: "1",
+        name: "markets",
+        url: "/",
+        items: [
+            {
+                id: "1",
+                name: "bitcoin",
+                url: "/"
+            },
+            {
+                id: "2",
+                name: "ethereum",
+                url: "/"
+            },
+            {
+                id: "3",
+                name: "tether",
+                url: "/"
+            },
+            {
+                id: "4",
+                name: "shiba",
+                url: "/"
+            },
+            {
+                id: "5",
+                name: "all_coins",
+                url: "/"
+            }
+        ]
+    },
+    {
+        id: "2",
+        name: "trades",
+        url: "/",
+        items: [
+            {
+                id: "7",
+                name: "professional",
+                url: "/"
+            },
+            {
+                id: "8",
+                name: "classic",
+                url: "/"
+            }
+        ]
+    },
+    {
+        id: "3",
+        name: "user_guide",
+        url: "/"
+    },
+    {
+        id: "4",
+        name: "wage",
+        url: "/wage"
+    },
+    {
+        id: "5",
+        name: "blog",
+        url: "/blog"
+    }
+];
 export { NavBar };
 
 function NavBar() {
@@ -24,28 +89,33 @@ function NavBar() {
     // only show nav when logged in
     if (!user) return (
         <Navbar bg="light" expand="lg">
-        <Container>
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+            <Container>
+                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        {
+                            navbarItems.map(navbarItem => {
+                                let currentItem = []
+                                if (navbarItem.items) {
+                                    const dropdowns = navbarItem.items.map(
+                                        dropdownItem => {
+                                            return <NavDropdown.Item key={dropdownItem.id} href={dropdownItem.url}>{t(dropdownItem.name)}</NavDropdown.Item>
+                                        }
+                                    )
+                                    const parentNavDropdown = <NavDropdown title={t(navbarItem.name)} id="basic-nav-dropdown">{dropdowns}</NavDropdown>
+                                    currentItem.push(parentNavDropdown)
+                                }
+                                else {
+                                    currentItem.push(<Nav.Link key={navbarItem.id} href={navbarItem.url}>{t(navbarItem.name)}</Nav.Link>);
+                                }
+                                return [...currentItem]
+                            })
+                        }
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     );
 
     return (

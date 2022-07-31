@@ -7,5 +7,17 @@
     "home": "Home",
     "manage_users": "Manage Users",
     "logout": "Logout",
-    "users": "Users"
+    "users": "Users",
+    "markets": "Markets",
+    "trades": "Trades",
+    "user_guide": "User Guide",
+    "wage": "Wage",
+    "blog": "Blog",
+    "bitcoin": "Bitcoin",
+    "ethereum": "Ethereum",
+    "tether": "Tether",
+    "shiba": "Shiba",
+    "all_coins": "All Coins",
+    "professional": "Professional",
+    "classic": "Classic"
 }

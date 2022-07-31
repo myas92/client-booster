@@ -7,5 +7,17 @@
     "home": "خانه",
     "manage_users": "مدیریت کاربران",
     "logout": "خروج",
-    "users": "کاربران"
+    "users": "کاربران",
+    "markets": "بازارها",
+    "trades": "معامله ها",
+    "user_guide": "راهنمای استفاده",
+    "wage": "کارمزد",
+    "blog": "بلاگ",
+    "bitcoin": "بیتکوین",
+    "ethereum": "اتریوم",
+    "tether": "تتر",
+    "shiba": "شیبا",
+    "all_coins": "همه کوین ها",
+    "professional": "حرفه ای",
+    "classic": "کلاسیک"
 }
