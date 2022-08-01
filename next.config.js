@@ -1,3 +1,4 @@
+const path = require('path')
 const { i18n } = require("./next-i18next.config");
 module.exports = {
     reactStrictMode: true,
@@ -9,5 +10,6 @@ module.exports = {
             ? 'http://localhost:3000/api' // development api
             : 'http://localhost:3000/api' // production api
     },
-    i18n
+    i18n,
+
 }

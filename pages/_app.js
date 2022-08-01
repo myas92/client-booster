@@ -2,10 +2,11 @@ import { appWithTranslation } from 'next-i18next';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import 'styles/globals.css';
-
+import 'styles/globals.scss';
+import 'styles/NavbarMenu.scss';
 import { userService } from 'services';
-import { NavBar, Alert } from 'components';
+import { NavbarMenu } from 'components/navbar-menu';
+import { Alert } from 'components';
 import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.rtl.min.css';
@@ -79,9 +80,9 @@ function App({ Component, pageProps }) {
                 <meta name="viewport" content="initial-scale=1, width=device-width" />
             </Head>
             <SSRProvider>
-                <ThemeProvider>
+            <ThemeProvider>
                     <div className={`app-container ${user ? 'bg-light' : ''}`} dir={locale == "fa" ? "rtl" : "ltr"} >
-                    <NavBar />
+                    <NavbarMenu />
                     <Alert />
                         {authorized && <Component {...pageProps} />}
                     </div>
