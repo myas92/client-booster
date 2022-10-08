@@ -92,47 +92,54 @@ function NavbarMenu() {
         <>
             {/* <Navbar className={styles.bbg} expand="lg" > */}
             {/* <Navbar className="bbg" expand="lg" > */}
-            <Navbar variant="mycss" expand="lg" >
-                <Container>
-                    <Navbar.Brand href="/">
-                        <img
-                            src="/favicon.ico"
-                            width="30"
-                            height="30"
-                            className="d-inline-block align-top"
-                            alt=""
-                        />
-                        <h1>Hiiii</h1>
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-                            {
-                                navbarItems.map(navbarItem => {
-                                    let currentItem = []
-                                    if (navbarItem.items) {
-                                        const dropdowns = navbarItem.items.map(
-                                            dropdownItem => {
-                                                return <NavDropdown.Item key={dropdownItem.id} href={dropdownItem.url}>{t(dropdownItem.name)}</NavDropdown.Item>
-                                            }
-                                        )
-                                        const parentNavDropdown = <NavDropdown key={20} title={t(navbarItem.name)} id="basic-nav-dropdown">
-                                            <div className='bbg'>
-                                                {dropdowns}
+            <Navbar variant="mycss text-body" expand="lg" >
+                <Navbar.Brand href="/" className="d-none d-lg-block">
+                    <img
+                        src="/favicon.ico"
+                        width="50"
+                        height="50"
+                        className="d-inline-block align-top"
+                        alt=""
+                    />
 
-                                            </div>
-                                        </NavDropdown>
-                                        currentItem.push(parentNavDropdown)
-                                    }
-                                    else {
-                                        currentItem.push(<Nav.Link key={navbarItem.id} href={navbarItem.url}>{t(navbarItem.name)}</Nav.Link>);
-                                    }
-                                    return [...currentItem]
-                                })
-                            }
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav" className=''>
+                    <Nav className="text-body">
+                        {
+                            navbarItems.map(navbarItem => {
+                                let currentItem = []
+                                if (navbarItem.items) {
+                                    const dropdowns = navbarItem.items.map(
+                                        dropdownItem => {
+                                            return <NavDropdown.Item key={dropdownItem.id} href={dropdownItem.url}>{t(dropdownItem.name)}</NavDropdown.Item>
+                                        }
+                                    )
+                                    const parentNavDropdown = <NavDropdown key={20} title={t(navbarItem.name)} id="basic-nav-dropdown">
+                                        <div className='bbg'>
+                                            {dropdowns}
+
+                                        </div>
+                                    </NavDropdown>
+                                    currentItem.push(parentNavDropdown)
+                                }
+                                else {
+                                    currentItem.push(<Nav.Link key={navbarItem.id} href={navbarItem.url}>{t(navbarItem.name)}</Nav.Link>);
+                                }
+                                return [...currentItem]
+                            })
+                        }
+                    </Nav>
+
+                </Navbar.Collapse>
+
+                <Nav className='d-flex authentication flex-row justify-content-around'>
+                    <Nav.Link href="#deets"> ورود</Nav.Link>
+                    <Nav.Link eventKey={2} href="#memes" className='bg-warning'>
+                        ثبت نام
+                    </Nav.Link>
+                </Nav>
+
             </Navbar>
         </>
     );

@@ -1,11 +1,26 @@
 .navbar-mycss {
-    background-color: rgb(0, 128, 75);
-  }
+
+  box-shadow: 0px 1px 0px rgb(0 0 0 / 10%);
+  font-size: 1.2rem;
+  color: #2277b4 !important
+}
+
 #basic-nav-dropdown {
-    background-color: rgb(172, 171, 80) !important;
-  }
+  // background-color: rgb(172, 171, 80) !important;
+}
+
 .bbg {
-    background-color: purple;
-  }
+  // background-color: purple;
+}
 
+.authentication {
+  width: 10rem;
+}
 
+.form-horizontal * {
+  direction: rtl;
+}
+
+.form-text2{
+  font-size: 0.5rem;
+}
