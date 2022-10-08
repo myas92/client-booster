@@ -134,8 +134,8 @@ function NavbarMenu() {
                 </Navbar.Collapse>
 
                 <Nav className='d-flex authentication flex-row justify-content-around'>
-                    <Nav.Link href="#deets"> ورود</Nav.Link>
-                    <Nav.Link eventKey={2} href="#memes" className='bg-warning'>
+                    <Nav.Link href="/account/login"> ورود</Nav.Link>
+                    <Nav.Link eventKey={2} href="/account/register" className='bg-warning'>
                         ثبت نام
                     </Nav.Link>
                 </Nav>
