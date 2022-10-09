@@ -3,6 +3,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Accordion, Container, Navbar, NavDropdown, Nav, Row, Col, InputGroup, Form, Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { HomeInfo } from 'components/home';
 export default Home;
 function Home() {
     const { t } = useTranslation("common");
@@ -25,13 +26,13 @@ function Home() {
                                     aria-describedby="btnGroupAddon"
                                 />
                                 <Button>شروع</Button>
-                                
+
                             </InputGroup>
                             <div className='form-text2'>در کمتر از ۵ دقیقه ثبت‌نام و اولین معامله خود را شروع کنید.</div>
                         </div>
                     </Col>
                     <Col className='mt-5 '>
-                        <img src="mobile_home.png" alt="..."></img>
+                        <HomeInfo />
                     </Col>
 
                 </Row>
