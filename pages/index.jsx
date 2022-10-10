@@ -14,7 +14,7 @@ function Home() {
         <div className="">
             <Container className=''>
                 <Row className='mt-5'>
-                    <Col className='d-flex flex-column m-auto'>
+                    <div className='d-flex flex-column m-auto col-lg-6 col-sm-12'>
                         <h1>صرافی بوستر</h1>
                         <h5>بازار خرید و فروش ارزهای دیجیتال</h5>
                         <div className='col-lg-10'>
@@ -30,10 +30,10 @@ function Home() {
                             </InputGroup>
                             <div className='form-text2'>در کمتر از ۵ دقیقه ثبت‌نام و اولین معامله خود را شروع کنید.</div>
                         </div>
-                    </Col>
-                    <Col className='mt-5 '>
+                    </div>
+                    <div className='mt-5 col-lg-6 col-sm-12'>
                         <HomeInfo />
-                    </Col>
+                    </div>
 
                 </Row>
                 <div>

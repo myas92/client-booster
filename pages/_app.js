@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import 'styles/globals.scss';
 import 'styles/NavbarMenu.scss';
+import 'styles/home-styles/mobile-frame.scss'
 import { userService } from 'services';
 import { NavbarMenu } from 'components/navbar-menu';
 import { Alert } from 'components';

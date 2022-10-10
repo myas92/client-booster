@@ -1,0 +1,52 @@
+.mobile-frame {
+    position: relative;
+    width: 300px;
+    z-index: 1;
+  }
+  
+  .mobiles-frame {
+    position: relative;
+    width: 300px;
+    z-index: 1;
+    height: 95%;
+  }
+  
+  .mobile-body-left {
+    position: absolute;
+    color: aliceblue;
+    top: 0.5rem;
+    border-radius: 10px;
+    right: 7px;
+    background-color: rgb(103, 87, 197);
+    width: 94%;
+    height: 95%;
+    display: flex;
+    z-index: -1;
+  }
+  
+  .mobile-frame-left {
+    display: flex;
+    position: relative;
+    z-index: 2;
+    right: -100px;
+  }
+  .mobile-frame-right {
+    display: flex;
+    position: relative;
+    right: 0px;
+    width: 250px;
+    top: 2rem;
+    height: 100%;
+  }
+  .mobile-body-right {
+    position: absolute;
+    color: aliceblue;
+    top: 0.5rem;
+    border-radius: 50px;
+    right: 7px;
+    background-color: rgb(103, 87, 197);
+    width: 94%;
+    height: 96%;
+    z-index: -1;
+  }
+  
