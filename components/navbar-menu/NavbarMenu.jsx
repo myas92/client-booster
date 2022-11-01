@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { NavLink } from '.';
+import { NavLink } from '../NavLink';
 import { userService } from 'services';
 import { useTranslation } from 'next-i18next';
 import { Accordion, Container, Navbar, NavDropdown, Nav } from 'react-bootstrap';
@@ -79,7 +79,9 @@ function NavbarMenu() {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const subscription = userService.user.subscribe(x => setUser(x));
+        const subscription = userService.user.subscribe(
+            x => 
+            setUser(x));
         return () => subscription.unsubscribe();
     }, []);
 

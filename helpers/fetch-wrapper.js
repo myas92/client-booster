@@ -1,5 +1,5 @@
 import getConfig from 'next/config';
-
+import axios from 'axios'
 import { userService } from 'services';
 
 const { publicRuntimeConfig } = getConfig();
@@ -19,14 +19,25 @@ function get(url) {
     return fetch(url, requestOptions).then(handleResponse);
 }
 
-function post(url, body) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...authHeader(url) },
-        credentials: 'include',
-        body: JSON.stringify(body)
-    };
-    return fetch(url, requestOptions).then(handleResponse);
+async function post(url, body) {
+    try {
+        const config = {
+            method: 'post',
+            url: 'http://localhost:7000/api/v1/auth/login',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: body
+        };
+        const response = await axios(config);
+        console.log(response.data)
+        return handleResponse(response.data)
+        
+    } catch (error) {
+        console.log(error)
+        handleResponse(error.response.data)
+    }
+
 }
 
 function put(url, body) {
@@ -35,7 +46,7 @@ function put(url, body) {
         headers: { 'Content-Type': 'application/json', ...authHeader(url) },
         body: JSON.stringify(body)
     };
-    return fetch(url, requestOptions).then(handleResponse);    
+    return fetch(url, requestOptions).then(handleResponse);
 }
 
 // prefixed with underscored because delete is a reserved word in javascript
@@ -62,19 +73,10 @@ function authHeader(url) {
 }
 
 function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        
-        if (!response.ok) {
-            if ([401, 403].includes(response.status) && userService.userValue) {
-                // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
-                userService.logout();
-            }
-
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-
-        return data;
-    });
+    if ([400, 401, 403].includes(response.result.status_code)) {
+        // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
+        // userService.logout();
+        throw new Error(response.message)
+    }
+    return response.result;
 }

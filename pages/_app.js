@@ -14,7 +14,6 @@ import 'bootstrap/dist/css/bootstrap.rtl.min.css';
 import { Button, SSRProvider, ThemeProvider } from 'react-bootstrap';
 
 export default appWithTranslation(App);
-
 function App({ Component, pageProps }) {
     const router = useRouter();
     const [user, setUser] = useState(null);

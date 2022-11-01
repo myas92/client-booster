@@ -11,7 +11,7 @@ import { useTranslation } from 'next-i18next';
 
 export default Login;
 
-function Login() {
+ function Login() {
     const { t } = useTranslation("common")
     const router = useRouter();
     // form validation rules 
@@ -25,14 +25,20 @@ function Login() {
     const { register, handleSubmit, formState } = useForm(formOptions);
     const { errors } = formState;
 
-    function onSubmit({ username, password }) {
-        return userService.login(username, password)
-            .then(() => {
-                // get return url from query parameters or default to '/'
-                const returnUrl = router.query.returnUrl || '/dashboard';
-                router.push(returnUrl);
-            })
-            .catch(alertService.error);
+    async function onSubmit({ username, password }) {
+        try {
+            console.log("____________((((((((((((((")
+            let result =  await userService.login(username, password)
+            // get return url from query parameters or default to '/'
+            const returnUrl = router.query.returnUrl || '/dashboard';
+            router.push(returnUrl);
+            console.log('-------->', result)
+            return result
+
+        } catch (err) {
+            alertService.error(err.message)
+        }
+
     }
 
     return (

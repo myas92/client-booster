@@ -10,7 +10,7 @@ const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStora
 
 export const userService = {
     user: userSubject.asObservable(),
-    get userValue () { return userSubject.value },
+    get userValue() { return userSubject.value },
     login,
     logout,
     register,
@@ -20,15 +20,18 @@ export const userService = {
     delete: _delete
 };
 
-function login(username, password) {
-    return fetchWrapper.post(`${baseUrl}/authenticate`, { username, password })
-        .then(user => {
-            // publish user to subscribers and store in local storage to stay logged in between page refreshes
-            userSubject.next(user);
-            localStorage.setItem('user', JSON.stringify(user));
+async function login(username, password) {
+    console.log("**********************");
+    let user = await fetchWrapper.post(`${baseUrl}/authenticate`, 
+    { 
+        mobile_number: username,
+        password: password
+    });
+    // publish user to subscribers and store in local storage to stay logged in between page refreshes
+    userSubject.next(user);
+    localStorage.setItem('user', JSON.stringify(user));
+    return user;
 
-            return user;
-        });
 }
 
 function logout() {
